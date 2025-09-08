@@ -1,0 +1,58 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div id="company-section" class="content-section">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-primary mb-4"><i class="bi bi-building me-2"></i> ကုမ္ပဏီအချက်အလက် ပြင်ဆင်ရန်
+            </h5>
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3 text-center">
+                    {% if user.owner.company_logo %}
+                    <img src="{{ user.owner.company_logo.url }}" alt="Company Logo" class="rounded-circle"
+                        style="width: 120px; height: 120px; object-fit: cover;">
+                    {% else %}
+                    <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded-circle mx-auto"
+                        style="width: 120px; height: 120px; font-size: 3rem;">
+                        <i class="bi bi-shop"></i>
+                    </div>
+                    {% endif %}
+                    <br>
+                    <label for="companyLogo" class="form-label mt-2">Logo ပြောင်းရန်</label>
+                    
+                </div>
+                <div class="mb-3">
+                    <h6 class="text-danger">* is required field.</h6>
+                    <label for="{{ form.instance.company_logo.id_for_label }}">Profile:</label>
+                    {{ form.company_logo }}
+                    {% for error in form.company_logo.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label for="companyName" class="form-label">ကုမ္ပဏီအမည်(<span class="text-danger">*</span>)</label>
+                    {{ form.company_name }}
+                    {% for error in form.company_name.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label for="companyAddress" class="form-label">ကုမ္ပဏီလိပ်စာ(<span class="text-danger">*</span>)</label>
+                    {{ form.company_address }}
+                    {% for error in form.company_address.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-end mt-4">
+                    <a href="{% url 'dashboard:dashboard-home' %}" type="button" id="hide-add-user-form"
+                        class="btn btn-secondary rounded-pill me-2"><i class="bi bi-arrow-left me-1"></i>ပယ်ဖျက်ရန်</a>
+                    <button type="submit" class="btn btn-primary rounded-pill"><i class="bi bi-check-circle me-1"></i>သိမ်းဆည်းရန်</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends '../base.html' %}
+{% block title %}Menus List{% endblock %}
+{% load pagination_tags %}
+{% block content %}
+<!-- Menu Items Section (NEW) -->
+<div id="menu-items-section" class="content-section">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="card-title text-primary"><i class="bi bi-shop me-2"></i> မီနူးပစ္စည်းများ စာရင်း</h5>
+                <a href="{% url 'dashboard:add-new-menu-items' %}" class="btn btn-sm btn-primary rounded-pill"><i
+                        class="bi bi-plus me-1"></i>ပစ္စည်းအသစ်ထည့်ရန်</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ပုံ</th>
+                            <th scope="col">အမည်</th>
+                            <th scope="col">အမျိုးအစား</th>
+                            <th scope="col">ဈေးနှုန်း</th>
+                            <th scope="col">အခြေအနေ</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">လုပ်ဆောင်ချက်များ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for menu in items_objects %}
+                        <tr>
+                            <td>{{ forloop.counter0|add:items_objects.start_index }}</td> <!-- Row number -->
+                            <td>{{ menu.name }}</td>
+                            <td>{{ menu.category.name }}</td>
+                            <td>{{ menu.price }} Kys</td>
+                            <td>{% if menu.is_available %} <span class="badge bg-success">ရရှိနိုင်သည်</span> {% else %}<span class="badge bg-danger">ကုန်နေသည်</span>{% endif %}</td>
+                            <td>{% if menu.image %}
+                                <img src="{{ menu.image.url }}" alt="Profile Image" height="40" />
+                                {% else %}
+                                No Image
+                                {% endif %}</td>
+                            <td>
+                                <a href="{% url 'dashboard:menu-edit' menu.id %}" class="btn btn-sm btn-outline-secondary me-2"><i class="bi bi-pencil mx-2"></i>ပြင်ရန်</a>
+                                <a href="{% url 'dashboard:menu-delete' menu.id %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash mx-2"></i>ဖျက်ရန်</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center">No users found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% render_pagination items_objects %}
+        </div>
+    </div>
+</div>
+{% endblock %}

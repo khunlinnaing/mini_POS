@@ -1,0 +1,132 @@
+{% extends '../base.html' %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom rounded-pill mb-4">
+    <div class="container-fluid">
+        <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebar-wrapper">
+            <i class="bi bi-list"></i>
+        </button>
+        <h5 class="my-2 ms-3">ကြိုဆိုပါတယ်၊ အသုံးပြုသူ!</h5>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="content-section">
+        <!-- Company Info Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card bg-white p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-auto text-center mb-3 mb-md-0">
+                            <!-- {{user.owner.company_logo}} -->
+                            {% if user.owner.company_logo %}
+                            <img src="{{ user.owner.company_logo.url }}" alt="Company Logo" class="rounded-circle"
+                                style="width: 80px; height: 80px; object-fit: cover;">
+                            {% else %}
+                            <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded-circle"
+                                style="width: 80px; height: 80px; font-size: 2.5rem;">
+                                <i class="bi bi-shop"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md">
+                            <h3 class="fw-bold mb-1">{{ user.owner.company_name|default:"ကုမ္ပဏီအမည်" }}</h3>
+                            <p class="text-muted mb-0">{{ user.owner.company_address|default:"လိပ်စာ မထည့်ရသေးပါ" }}</p>
+                        </div>
+                        <div class="col-md-auto text-end">
+                            <a href="{% url 'dashboard:company-edit' user.owner.id %}"
+                                class="btn btn-sm btn-outline-primary rounded-pill">အချက်အလက်ပြင်ရန်</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Summary Cards -->
+        <div class="row g-4 mb-4">
+            <!-- Sales Card -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center text-primary">
+                    <div class="card-body">
+                        <i class="bi bi-graph-up-arrow display-4 mb-2"></i>
+                        <h5 class="card-title">စုစုပေါင်းအရောင်း</h5>
+                        <h2 class="card-text fw-bold mt-3">Ks. 150,000</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Card -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 text-center text-success">
+                    <div class="card-body">
+                        <i class="bi bi-cart-fill display-4 mb-2"></i>
+                        <h5 class="card-title">မှာယူမှုအရေအတွက်</h5>
+                        <h2 class="card-text fw-bold mt-3">55</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tables Card -->
+            <div class="col-lg-4 col-md-12">
+                <div class="card h-100 text-center text-info">
+                    <div class="card-body">
+                        <i class="bi bi-table display-4 mb-2"></i>
+                        <h5 class="card-title">ရနိုင်သော စားပွဲများ</h5>
+                        <h2 class="card-text fw-bold mt-3">12</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger mb-4"><i class="bi bi-clock-history me-2"></i> မပြီးသေးသော
+                            မှာယူမှုများ</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">မှာယူမှုနံပါတ်</th>
+                                        <th scope="col">စားပွဲနံပါတ်</th>
+                                        <th scope="col">စုစုပေါင်းပမာဏ</th>
+                                        <th scope="col">အခြေအနေ</th>
+                                        <th scope="col">လုပ်ဆောင်ချက်များ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">#001</th>
+                                        <td>A1</td>
+                                        <td>Ks. 15,000</td>
+                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-outline-primary">အသေးစိတ်ကြည့်ရန်</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#002</th>
+                                        <td>B5</td>
+                                        <td>Ks. 22,500</td>
+                                        <td><span class="badge bg-primary">Processing</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-outline-primary">အသေးစိတ်ကြည့်ရန်</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#003</th>
+                                        <td>C3</td>
+                                        <td>Ks. 8,000</td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-outline-primary">အသေးစိတ်ကြည့်ရန်</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
