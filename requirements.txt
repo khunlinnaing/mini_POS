@@ -3,4 +3,8 @@ djangorestframework
 markdown
 django-filter
 django-cors-headers
-Pillow
+#for google login
+django-allauth
+requests
+PyJWT
+cryptography

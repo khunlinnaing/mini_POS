@@ -40,6 +40,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+
+    #========= login social media ================================
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    #========= login social media ================================
     'website',
     'api',
     'dashboard',
@@ -54,6 +63,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    #make google Login
+    'allauth.account.middleware.AccountMiddleware',
+
 ]
 
 ROOT_URLCONF = 'LanSone.urls'
@@ -84,6 +96,20 @@ REST_FRAMEWORK = {
 # Add this to your settings.py if you haven't already.
 # It ensures that user models are loaded correctly.
 AUTH_USER_MODEL = 'auth.User'
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = [
+    #Sign with username or Email
+    'website.loginEmailorUsername.EmailOrUsernameModelBackend',
+    #Register with Social Media
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    ]
+# Optional settings
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/login/'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
 # LOGIN_URL = '/login/'
 WSGI_APPLICATION = 'LanSone.wsgi.application'
 
@@ -134,6 +160,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# os.path.join(BASE_DIR, "static")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -141,3 +168,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#google log in
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '132233786716-npj5n16bc3kgi2s3ttdcqq6u5ao688ij.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}

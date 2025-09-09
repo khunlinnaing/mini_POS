@@ -1,0 +1,69 @@
+<!-- Navbar -->
+ {% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">MiniPOS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#menuitem">Items</a>
+        </li>
+        {% if user.is_superuser or user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard:dashboard-home' %}">Dashboard</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+      </ul>
+      {% if not request.user.is_authenticated %}
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'website:login-view' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'website:register-view' %}">Register</a>
+        </li>
+      </ul>
+
+      {% else %}
+      
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            {% if user.profile.profile %}
+            <img src="{{ user.profile.profile.url }}" alt="User" class="rounded-circle me-2" style="width: 30px;">
+            {% else %}
+            <img 
+    src="{% static 'images/logos/personlogo.png' %}" 
+    alt="User" 
+    class="rounded-circle me-2" 
+    style="width: 30px;">
+            {% endif %}
+            {{ user.first_name }} {{ user.first_name }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'website:logout-view' %}">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+     {% endif %}
+    </div>
+  </div>
+</nav>

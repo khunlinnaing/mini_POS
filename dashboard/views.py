@@ -35,7 +35,7 @@ def add_user(request):
         form = UserForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('user')
+            return redirect('dashboard:user')
     else:
         form = UserForm()
     
@@ -49,7 +49,7 @@ def edit_user(request, pk):
         form = EditUserForm(request.POST, request.FILES,instance=user)
         if form.is_valid():
             form.save()
-            return redirect('user')
+            return redirect('dashboard:user')
     else:
         form = EditUserForm(instance=user)
     return render(request, 'users/patch.html', {'form': form})
@@ -59,7 +59,7 @@ def delete_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     if user:
         user.delete()
-        return redirect('user')
+        return redirect('dashboard:user')
     
 @login_required
 def profile(request):
@@ -102,7 +102,7 @@ def new_category(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('category')
+            return redirect('dashboard:category')
     else:
         form = CategoryForm()
     return render(request, 'category/newcategory.html', {'form': form})
@@ -115,7 +115,7 @@ def category_edit(request, pk):
         form = EditCategoryForm(request.POST, request.FILES,instance=category)
         if form.is_valid():
             form.save()
-            return redirect('category')
+            return redirect('dashboard:category')
     else:
         form = EditCategoryForm(instance=category)
     return render(request, 'category/editcategory.html', {'form': form})
@@ -148,7 +148,7 @@ def add_new_menu_items(request):
         form = MenuItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('menu-item')
+            return redirect('dashboard:menu-item')
     else:
         form = MenuItemForm()
     return render(request, 'menus/newmenu.html', {'form': form})
@@ -160,7 +160,7 @@ def menu_edit(request, pk):
         form = EditMenuItemForm(request.POST, request.FILES,instance=item)
         if form.is_valid():
             form.save()
-            return redirect('menu-item')
+            return redirect('dashboard:menu-item')
     else:
         form = EditMenuItemForm(instance=item)
     return render(request, 'menus/editmenu.html', {'form': form})
@@ -170,7 +170,7 @@ def menu_delete(request, pk):
     item = get_object_or_404(Item, pk=pk)
     if item:
         item.delete()
-        return redirect(f"{reverse('menu-item')}?page={request.GET.get('page', 1)}")
+        return redirect(f"{reverse('dashboard:menu-item')}?page={request.GET.get('page', 1)}")
     
 """Start of MenuItem section """
 
@@ -202,7 +202,7 @@ def table_add(request):
         form = TableForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('tables')
+            return redirect('dashboard:tables')
     else:
         form = TableForm()
     return render(request, 'tables/newtable.html', {'form': form})
@@ -214,7 +214,7 @@ def table_edit(request, pk):
         form = EditTableForm(request.POST, instance=table)
         if form.is_valid():
             form.save()
-            return redirect('tables')
+            return redirect('dashboard:tables')
     else:
         form = EditTableForm(instance=table)
     return render(request, 'tables/edittable.html', {'form': form})
