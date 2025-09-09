@@ -91,21 +91,20 @@
                         <div class="text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <!-- Phone and Staff Level -->
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <label for="{{ form.phone.id_for_label }}">Phone<span class="text-danger">*</span></label>
                         {{ form.phone }}
                         {% for error in form.phone.errors %}
                         <div class="text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6" style="display: none">
                         <label for="{{ form.staff_level.id_for_label }}">Role<span class="text-danger">*</span></label>
                         {{ form.staff_level }}
                         {% for error in form.staff_level.errors %}
                         <div class="text-danger">{{ error }}</div>
                         {% endfor %}
-                    </div>
+                    </div> -->
                     <!-- Profile Picture -->
                     <div class="col-12">
                         <label for="{{ form.profile.id_for_label }}">Profile:</label>
@@ -123,10 +122,10 @@
                 <!-- Social Media Login -->
                 <div class="d-grid gap-2 mt-3">
                     <p class="text-center text-muted">Or register with</p>
-                    <a href="{% provider_login_url 'google' %}" class="btn btn-outline-primary btn-social">
+                    <a href="#" class="btn btn-outline-primary btn-social">
                         <i class="fab fa-google"></i> Continue with Google
                     </a>
-                    <a href="" class="btn btn-outline-primary btn-social">
+                    <a href="#" class="btn btn-outline-primary btn-social">
                         <i class="fab fa-facebook-f"></i> Continue with Facebook
                     </a>
                 </div>
