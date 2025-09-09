@@ -1,24 +1,29 @@
+from rest_framework import serializers
 from django.contrib.auth.models import User
-from rest_framework.serializers import ModelSerializer, ValidationError
+from dashboard.models import *
 
-class UserSerializer(ModelSerializer):
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ['id', 'company_name','company_address', 'company_logo']
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    company = CompanySerializer()
+
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'phone', 'profile', 'staff_level', 'company']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
-        extra_kwargs = {
-            'password': {'write_only': True},
-            'email': {'required': True},
-        }
+        fields = ['id', 'username', 'email', 'first_name', 'last_name','profile']
 
-    def validate_email(self, value):
-        if User.objects.filter(email=value).exists():
-            raise ValidationError("A user with this email already exists.")
-        return value
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
+    def get_profile(self, obj):
+        try:
+            profile = obj.profile
+            return UserProfileSerializer(profile).data
+        except UserProfile.DoesNotExist:
+            return None

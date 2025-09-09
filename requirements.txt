@@ -3,6 +3,8 @@ djangorestframework
 markdown
 django-filter
 django-cors-headers
+#swagger
+drf-yasg
 #for google login
 django-allauth
 requests

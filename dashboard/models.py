@@ -16,7 +16,7 @@ class UserProfile(models.Model):
         (1, 'Manager'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company')
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company', default=1)
     phone = models.CharField()
     profile = models.ImageField(upload_to='profile/')
     staff_level = models.IntegerField(choices=STAFF_LEVEL_CHOICES, default=0)
