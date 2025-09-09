@@ -10,28 +10,28 @@
                 <h6 class="text-danger">* is required field.</h6>
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="{{ form.username.id_for_label }}">Account(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.username.id_for_label }}">Account<span class="text-danger">*</span>:</label>
                     {{ form.username }}
                     {% for error in form.username.errors %}
                     <div class="text-danger">{{ error }}</div>
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.first_name.id_for_label }}">First Name(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.first_name.id_for_label }}">First Name<span class="text-danger">*</span>:</label>
                     {{ form.first_name }}
                     {% for error in form.first_name.errors %}
                     <div class="text-danger">{{ error }}</div>
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.last_name.id_for_label }}">Last Name(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.last_name.id_for_label }}">Last Name<span class="text-danger">*</span>:</label>
                     {{ form.last_name }}
                     {% for error in form.last_name.errors %}
                     <div class="text-danger">{{ error }}</div>
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.email.id_for_label }}">Email(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.email.id_for_label }}">Email<span class="text-danger">*</span>:</label>
                     {{ form.email }}
                     {% for error in form.email.errors %}
                     <div class="text-danger">{{ error }}</div>
@@ -45,7 +45,7 @@
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.phone.id_for_label }}">Phone(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.phone.id_for_label }}">Phone<span class="text-danger">*</span>:</label>
                     {{ form.phone }}
                     {% for error in form.phone.errors %}
                     <div class="text-danger">{{ error }}</div>
@@ -59,7 +59,14 @@
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.password.id_for_label }}">Password(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.company.id_for_label }}">Company<span class="text-danger">*</span>:</label>
+                    {{ form.company }}
+                    {% for error in form.company.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.password.id_for_label }}">Password<span class="text-danger">*</span>:</label>
                     {{ form.password }}
                     {% for error in form.password.errors %}
                     <div class="text-danger">{{ error }}</div>
@@ -72,7 +79,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.confirm_password.id_for_label }}">Comfirm Password(<span class="text-danger">*</span>):</label>
+                    <label for="{{ form.confirm_password.id_for_label }}">Comfirm Password<span class="text-danger">*</span>:</label>
                     {{ form.confirm_password }}
                     {% for error in form.confirm_password.errors %}
                     <div class="text-danger">{{ error }}</div>

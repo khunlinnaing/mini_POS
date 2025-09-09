@@ -5,16 +5,17 @@
     <div class="card-body">
         <h5 class="card-title text-primary mb-4"><i class="bi bi-pencil me-2"></i> အမျိုးအစားပြင်ထည့်ရန်</h5>
         <form method="post">
+            <h6 class="text-danger">* is required field.</h6>
             {% csrf_token %}
             <div class="mb-3">
-                    <label for="{{ form.name.id_for_label }}">အမျိုးအစားအမည်(<span class="text-danger">*</span>)</label>
+                    <label for="{{ form.name.id_for_label }}">အမျိုးအစားအမည်<span class="text-danger">*</span>:</label>
                     {{ form.name }}
                     {% for error in form.name.errors %}
                     <div class="text-danger">{{ error }}</div>
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.description.id_for_label }}">Description</label>
+                    <label for="{{ form.description.id_for_label }}">Description:</label>
                     {{ form.description }}
                     {% for error in form.description.errors %}
                     <div class="text-danger">{{ error }}</div>

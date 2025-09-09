@@ -46,6 +46,7 @@
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Register</h2>
                 <form class="row g-3" method="post">
+                    <h5 class="text-danger">* is required field.</h5>
                     {% csrf_token %}
                     <!-- First Name and Last Name -->
                     <div class="col-md-6">
@@ -131,7 +132,7 @@
                 </div>
                 
                 <div class="text-center mt-3">
-                    <p class="text-muted">Already have an account? <a href="#" class="text-decoration-none">Log In</a></p>
+                    <p class="text-muted">Already have an account? <a href="{% url 'website:login-view' %}" class="text-decoration-none">Log In</a></p>
                 </div>
             </div>
         </div>

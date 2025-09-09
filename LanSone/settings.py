@@ -110,7 +110,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/login/'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-# LOGIN_URL = '/login/'
+LOGIN_URL = "website:login-view"
 WSGI_APPLICATION = 'LanSone.wsgi.application'
 
 

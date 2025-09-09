@@ -5,6 +5,7 @@
     <div class="card-body">
         <h5 class="card-title text-primary mb-4"><i class="bi bi-shop me-2"></i> မီနူးပစ္စည်းအသစ်ထည့်ရန်</h5>
         <form method="post" enctype="multipart/form-data">
+            <h6 class="text-danger">* is required field.</h6>
             {% csrf_token %}
             <div class="mb-3">
                 <label for="{{ form.name.id_for_label }}">ပစ္စည်းအမည် <span class="text-danger">*</span></label>

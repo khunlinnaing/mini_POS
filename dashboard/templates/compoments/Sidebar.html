@@ -2,7 +2,7 @@
 {% url_name_in 'index' 'company-edit' as is_index_page %}
 {% url_name_in 'user' 'add-user' 'edit-user' 'delete-user' as is_user_page %}
 {% url_name_in 'category' 'category-add' 'category-edit' as is_category_page %}
-{% url_name_in 'menu-item' 'menu-item-new' as is_menu_page %}
+{% url_name_in 'menu-item' 'add-new-menu-items' 'menu-edit' as is_menu_page %}
 {% url_name_in 'orders' as is_orders_page %}
 {% url_name_in 'tables' as is_tables_page %}
 {% url_name_in 'sale-record' as is_sale_record_page %}
@@ -50,7 +50,7 @@
             <i class="bi bi-person-circle me-2"></i> Profile
         </a>
 
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-white nav-link">
+        <a href="{% url 'website:logout-view' %}" class="list-group-item list-group-item-action bg-dark text-white nav-link">
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>
     </div>

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from dashboard.widgets import input_widget
-from ..models import UserProfile
+from ..models import UserProfile, Company
 
 
 class UserForm(forms.ModelForm):
@@ -43,12 +43,18 @@ class UserForm(forms.ModelForm):
         choices=UserProfile.STAFF_LEVEL_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+    company = forms.ModelChoiceField(
+        queryset=Company.objects.all(),
+        empty_label="Select Company",
+        label="Company",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     class Meta:
         model = User
         fields = [
             'username', 'email', 'password', 'confirm_password',
-            'first_name', 'last_name', 'phone', 'profile', 'staff_level'
+            'first_name', 'last_name', 'phone', 'profile', 'staff_level', 'company'
         ]
         
     username = forms.CharField(widget=input_widget(
@@ -95,6 +101,7 @@ class UserForm(forms.ModelForm):
             user.save()
             UserProfile.objects.create(
                 user=user,
+                company = self.cleaned_data.get('company'),
                 phone=self.cleaned_data.get('phone'),
                 profile=self.cleaned_data.get('profile'),
                 staff_level=self.cleaned_data.get('staff_level'),
@@ -123,6 +130,7 @@ class EditUserForm(UserForm):
         if self.instance:
             try:
                 profile = self.instance.profile
+                self.fields['company'].initial = profile.company
                 self.fields['phone'].initial = profile.phone
                 self.fields['profile'].initial = profile.profile
                 self.fields['staff_level'].initial = profile.staff_level

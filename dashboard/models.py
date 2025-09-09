@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Company(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner')
+    # user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner')
     company_name = models.CharField(default='A')
     company_logo = models.ImageField(upload_to='companylogo/')
     company_address = models.CharField()
@@ -16,6 +16,7 @@ class UserProfile(models.Model):
         (1, 'Manager'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company')
     phone = models.CharField()
     profile = models.ImageField(upload_to='profile/')
     staff_level = models.IntegerField(choices=STAFF_LEVEL_CHOICES, default=0)

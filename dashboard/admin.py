@@ -5,13 +5,13 @@ class CompanyAdmin(admin.ModelAdmin):
     """
     Company model ကို admin panel မှာ စီမံခန့်ခွဲရန်။
     """
-    list_display = ('company_name', 'user', 'company_address')
-    search_fields = ('company_name', 'company_address', 'user__username')
+    list_display = ('id','company_name', 'company_address', 'company_logo')
+    search_fields = ('company_name', 'company_address')
 
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone','profile','staff_level')
+    list_display = ('user', 'phone','profile','staff_level', 'company')
     search_fields = ('user',)
 
 @admin.register(Category)

@@ -21,8 +21,8 @@
                     <div class="row align-items-center">
                         <div class="col-md-auto text-center mb-3 mb-md-0">
                             <!-- {{user.owner.company_logo}} -->
-                            {% if user.owner.company_logo %}
-                            <img src="{{ user.owner.company_logo.url }}" alt="Company Logo" class="rounded-circle"
+                            {% if user.profile.company.company_logo %}
+                            <img src="{{ user.profile.company.company_logo.url }}" alt="Company Logo" class="rounded-circle"
                                 style="width: 80px; height: 80px; object-fit: cover;">
                             {% else %}
                             <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded-circle"
@@ -32,11 +32,11 @@
                             {% endif %}
                         </div>
                         <div class="col-md">
-                            <h3 class="fw-bold mb-1">{{ user.owner.company_name|default:"ကုမ္ပဏီအမည်" }}</h3>
-                            <p class="text-muted mb-0">{{ user.owner.company_address|default:"လိပ်စာ မထည့်ရသေးပါ" }}</p>
+                            <h3 class="fw-bold mb-1">{{ user.profile.company.company_name|default:"ကုမ္ပဏီအမည်" }}</h3>
+                            <p class="text-muted mb-0">{{ user.profile.company.company_address|default:"လိပ်စာ မထည့်ရသေးပါ" }}</p>
                         </div>
                         <div class="col-md-auto text-end">
-                            <a href="{% url 'dashboard:company-edit' user.owner.id %}"
+                            <a href="{% url 'dashboard:company-edit' 1 %}"
                                 class="btn btn-sm btn-outline-primary rounded-pill">အချက်အလက်ပြင်ရန်</a>
                         </div>
                     </div>
