@@ -91,7 +91,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ]
+    ],
 }
 # Add this to your settings.py if you haven't already.
 # It ensures that user models are loaded correctly.
