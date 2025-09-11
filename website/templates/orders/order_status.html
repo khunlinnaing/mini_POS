@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+    <h1>📦 Order #{{ order.pk }} အခြေအနေ</h1>
+
+    <p><strong>စားပွဲနံပါတ်:</strong> {{ order.table}}</p>
+    <p><strong>အခြေအနေ (Status):</strong> {{ order.get_status_display }}</p>
+    <p><strong>စုစုပေါင်းငွေ:</strong> {{ order.total_amount }} Ks</p>
+    <p><strong>ငွေပေးချေမှု:</strong>
+        {% if order.payment_status %}
+            ✅ ပေးပြီး
+        {% else %}
+            ❌ မပေးရသေးပါ
+        {% endif %}
+    </p>
+
+    <h3>🍽 မှာယူထားသောပစ္စည်းများ</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ပစ္စည်းအမည်</th>
+                <th>အရေအတွက်</th>
+                <th>ဈေးနှုန်း (တစ်ခုလျှင်)</th>
+                <th>စုစုပေါင်း</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.order_items.all %}
+                <tr>
+                    <td>{{ item.item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price_at_order }} Ks</td>
+                    <td>{{ item.subtotal }} Ks</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">မည်သည့်ပစ္စည်းမှ မရှိသေးပါ။</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

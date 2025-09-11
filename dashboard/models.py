@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Company(models.Model):
     # user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner')
@@ -74,6 +75,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
     price_at_order = models.DecimalField(max_digits=10, decimal_places=2)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    # order_date = models.DateTimeField(default=timezone.now, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.subtotal = self.quantity * self.price_at_order
@@ -95,7 +97,7 @@ class Sale(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='sale')
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.CharField(max_length=50, blank=True, null=True) 
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='sales')
 
     def __str__(self):
         return f"Sale #{self.pk} for Order #{self.order.pk}"
