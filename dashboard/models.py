@@ -43,9 +43,7 @@ class Item(models.Model):
         return self.name
 
 class Table(models.Model):
-    """
-    စားသောက်ဆိုင်ရဲ့ စားပွဲများ
-    """
+
     table_number = models.CharField(max_length=10, unique=True)
     capacity = models.IntegerField(default=4) # ထိုင်ခုံအရေအတွက်
     is_occupied = models.BooleanField(default=False) # စားပွဲ ပြီးပြီလား
@@ -54,9 +52,6 @@ class Table(models.Model):
         return f"Table {self.table_number}"
 
 class Order(models.Model):
-    """
-    Customer Order မှတ်တမ်း
-    """
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('processing', 'Processing'),

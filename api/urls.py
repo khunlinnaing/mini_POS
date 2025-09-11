@@ -61,5 +61,6 @@ router.register('sales', SaleViewSet)
 urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('login/', LoginAPIView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='register'),
     path('', include(router.urls)),
 ]
