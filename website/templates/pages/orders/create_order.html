@@ -1,0 +1,213 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .main-container {
+            padding: 20px;
+        }
+        @media (min-width: 992px) {
+            .main-container {
+                max-width: 1200px;
+                margin: 40px auto;
+            }
+        }
+        .card-custom {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+        }
+        .header-title {
+            color: #212529;
+            font-weight: 700;
+        }
+        .table-rounded thead th {
+            border-top: none;
+        }
+        .table-rounded thead th:first-child {
+            border-top-left-radius: 10px;
+        }
+        .table-rounded thead th:last-child {
+            border-top-right-radius: 10px;
+        }
+        .order-summary-card {
+            border-radius: 10px;
+            background-color: #f1f3f5;
+            padding: 20px;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .summary-item span {
+            font-weight: 500;
+        }
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-bottom-3 shadow-sm sticky-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo -->
+            <a class="navbar-brand me-auto" href="#">
+                <img src="https://placehold.co/40x40/E8EAF6/3F51B5?text=Logo" alt="Logo" width="30" height="30" class="d-inline-block align-text-top rounded-circle">
+                <span class="fw-bold ms-2 d-none d-sm-inline-block">Brand</span>
+            </a>
+
+            <!-- Center: Nav Items -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 flex-grow-1 justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+            </ul>
+
+            <!-- Right Side: User Dropdown -->
+            <div class="dropdown ms-auto">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://placehold.co/40x40/A5D6A7/2E7D32?text=User" alt="User" width="30" height="30" class="rounded-circle me-2">
+                    <span class="d-none d-sm-inline-block">Jane Doe</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container-fluid main-container">
+        <h1 class="header-title text-center mb-4">Your Order</h1>
+        <div class="row g-4">
+            <!-- Left Column: Menu and Order Items -->
+            <div class="col-lg-8">
+                <div class="card-custom h-100">
+                    <h4 class="fw-bold mb-3">Your Cart</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-borderless align-middle table-rounded">
+                            <thead class="bg-light text-muted">
+                                <tr>
+                                    <th scope="col" class="p-3">Product</th>
+                                    <th scope="col" class="text-center p-3">Quantity</th>
+                                    <th scope="col" class="text-end p-3">Price</th>
+                                    <th scope="col" class="text-end p-3">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Sample Order Items -->
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div style="width: 60px; height: 60px;" class="bg-secondary bg-opacity-10 rounded-3 me-3"></div>
+                                            <p class="mb-0 fw-semibold">Premium Coffee Beans</p>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">2</td>
+                                    <td class="text-end">$12.50</td>
+                                    <td class="text-end fw-bold">$25.00</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div style="width: 60px; height: 60px;" class="bg-secondary bg-opacity-10 rounded-3 me-3"></div>
+                                            <p class="mb-0 fw-semibold">Gourmet Chocolate Bar</p>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-end">$4.00</td>
+                                    <td class="text-end fw-bold">$4.00</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div style="width: 60px; height: 60px;" class="bg-secondary bg-opacity-10 rounded-3 me-3"></div>
+                                            <p class="mb-0 fw-semibold">Ceramic Mug</p>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-end">$8.00</td>
+                                    <td class="text-end fw-bold">$8.00</td>
+                                </tr>
+                                <!-- End of Sample Items -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="col-lg-4">
+                <div class="order-summary-card h-100">
+                    <h4 class="fw-bold mb-3">Order Summary</h4>
+                    <div class="summary-item text-muted">
+                        <span>Subtotal</span>
+                        <span>$37.00</span>
+                    </div>
+                    <div class="summary-item text-muted">
+                        <span>Shipping</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="summary-item text-muted">
+                        <span>Tax</span>
+                        <span>$2.50</span>
+                    </div>
+                    <hr>
+                    <div class="summary-item total-price">
+                        <span>Grand Total</span>
+                        <span>$44.50</span>
+                    </div>
+                    <div class="d-grid mt-4">
+                        <button class="btn btn-primary btn-lg">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html> -->

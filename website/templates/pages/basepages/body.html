@@ -1,0 +1,204 @@
+{% extends '../../index.html' %}
+{% load static %}
+{% block content %}
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="carousel-bg" style="background-image: url('{% static 'images/hero-bg.jpg' %}');">
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Unlock Your Potential</h5>
+                <p>Explore a wide range of courses designed to help you succeed in your career and life.</p>
+                <a href="#menuitems" class="btn btn-primary">Start Now</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="carousel-bg" style="background-image: url('{% static 'images/hero-bg.jpg' %}');">
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Learn from Industry Experts</h5>
+                <p>Our courses are taught by professionals with years of real-world experience.</p>
+                <a href="#menuitems" class="btn btn-primary">Discover More</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="carousel-bg" style="background-image: url('{% static 'images/hero-bg.jpg' %}');">
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Learn at Your Own Pace</h5>
+                <p>Our flexible learning platform allows you to study whenever and wherever you want.</p>
+                <a href="#menuitems" class="btn btn-primary">Join Today</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- End of Carousel Section -->
+
+<!-- Best Courses Section -->
+<div class="container my-5 food_section" id="menuitems">
+    <h2 class="text-center mb-4">Our Menu</h2>
+    <div class="d-flex justify-content-center mb-4">
+        <ul class="filters_menu">
+            <li class="{% if not selected_category %} active {% endif %}filter_category" attr-category-id="">All
+            </li>
+            {% for category in categories %}
+            <li class="filter_category {% if selected_category.name == category.name %} active {% endif %}"
+                attr-category-id="{{category.id}}">{{category.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Course Card 1 -->
+        {% if menu_items %}
+        {% for item in menu_items %}
+        <div class="col">
+            <div class="card h-100 shadow-sm rounded-lg overflow-hidden">
+                <img src="{{item.image.url}}" height="300" alt="Web Design Course">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <p class="card-text">{{item.description}}</p>
+                    <p><strong>{{item.price}} MMK</strong></p>
+                    <a href="{% url 'website:create-order' %}" class="btn btn-primary mt-2 rounded-pill">Start for
+                        order</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-danger">
+            <h1 class="text-danger text-center">No Data</h1>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row justify-content-center">
+
+        {% if current < item_length%} <a class="btn btn-primary show-more-btn w-25 my-5">
+            View More
+            </a>
+            {% endif %}
+    </div>
+</div>
+<!-- End of Best Courses Section -->
+
+<hr class="my-5">
+
+<!-- About Me Section -->
+<div class="container my-5" id="about">
+    <h2 class="text-center mb-4">About Me</h2>
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <div class="text-center">
+                <img src="https://placehold.co/400x400/212529/ced4da?text=Your+Photo" alt="Your Photo"
+                    class="img-fluid rounded-circle shadow-lg">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p class="lead">
+                Welcome! I am a passionate web developer with a keen eye for design and a love for creating
+                beautiful,
+                user-friendly websites. My goal is to transform ideas into digital realities, building
+                seamless experiences that are both functional and visually appealing.
+            </p>
+            <p>
+                With expertise in a variety of technologies, I am constantly learning and adapting to the
+                ever-evolving
+                world of web development. I believe in clean code, collaborative work, and the power of technology
+                to solve real-world problems. Let's build something amazing together!
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<!-- Contact Me Form Section -->
+<div class="container my-5" id="contact">
+    <h2 class="text-center mb-4">Contact Me</h2>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <form>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="nameInput" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="messageTextarea" class="form-label">Message</label>
+                    <textarea class="form-control" id="messageTextarea" rows="4" required></textarea>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+<form method="post" action="/#menuitems" class="d-none form_post_data">
+    {% csrf_token %}
+    <input name="category_id">
+    <input name="more">
+</form>
+{% endblock %}
+{% block script %}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // click filter category btn
+        const filterCategoryButtons = document.querySelectorAll("li.filter_category");
+
+        filterCategoryButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const categoryValue = this.getAttribute('attr-category-id');
+
+                const form = document.querySelector('.form_post_data');
+                const categoryInput = form.querySelector('input[name="category_id"]');
+                const more = form.querySelector('input[name="more"]');
+                if (categoryInput) {
+                    categoryInput.value = categoryValue;
+                    more.value = '';
+                    form.submit();
+                }
+            });
+        });
+        // end click filter category btn
+        // click more item button
+        const btn = document.querySelector('a.show-more-btn');
+        if (btn) {
+            btn.addEventListener('click', function () {
+                const selectedCategory = document.querySelector('li.filter_category.active');
+                const form = document.querySelector('.form_post_data');
+                const categoryInput = form.querySelector('input[name="category_id"]');
+                const more = form.querySelector('input[name="more"]');
+                if (selectedCategory) {
+                    const selectedValue = selectedCategory.getAttribute('attr-category-id');
+                    categoryInput.value = selectedValue;
+                    more.value = parseInt(`{{current}}`) + 4;
+                    form.submit();
+                }
+            });
+        }
+        // end click more item button
+    });
+</script>
+{% endblock %}

@@ -1,166 +1,62 @@
 {% load static %}
-<div class="hero_area">
-        <div class="bg-box">
-            <img src="{% static 'images/hero-bg.jpg' %}" alt="">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'images/favicon.png' %}" alt="logo" width="30">Mini POS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link home" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link item" href="#menuitems">Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link about"href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link contact" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dashboard"href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link order" href="{% url 'website:menu-item' %}">Order</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- A simple placeholder for a user avatar. You can replace this with an image. -->
+                            <img src="https://placehold.co/32x32/1d9607/white?text=User" class="rounded-circle me-2"
+                                alt="User Avatar" style="width: 32px; height: 32px;">
+                            John Doe
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'website:logout-view' %}">Sign out</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link order" href="{% url 'website:login-view'%}">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link order" href="{% url 'website:register-view'%}">Sign up</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <!-- header section strats -->
-        <header class="header_section">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="/">
-                        <span>
-                            Mini POS
-                        </span>
-                    </a>
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class=""> </span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav  mx-auto ">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#menuitems">Menu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#about">About</a>
-                            </li>
-                            {% if user.is_authenticated  and user.profile.staff_level == 1 %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'dashboard:dashboard-home' %}">Dashboard</a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                        
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            
-                            {% if not request.user.is_authenticated %}
-                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'website:login-view' %}">Login</a>
-                                    </li>
-                                    <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'website:register-view' %}">Register</a>
-                                    </li>
-                                </ul>
-
-                            {% else %}
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {% if user.profile.profile %}
-                                <img src="{{ user.profile.profile.url }}" alt="User" class="rounded-circle me-2" style="width: 30px;">
-                                {% else %}
-                                <img 
-                        src="{% static 'images/logos/personlogo.png' %}" 
-                        alt="User" 
-                        class="rounded-circle me-2" 
-                        style="width: 30px;">
-                                {% endif %}
-                                {{ user.first_name }} {{ user.first_name }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{% url 'website:logout-view' %}">Logout</a></li>
-                            </ul>
-                            </li>
-                            {% endif %}
-                        </ul>
-
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <!-- end header section -->
-        <!-- slider section -->
-        <section class="slider_section ">
-            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Fast Food Restaurant
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
-                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="#menuitems" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item ">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Fast Food Restaurant
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
-                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="#menuitems" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Fast Food Restaurant
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
-                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="#menuitems" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <ol class="carousel-indicators">
-                        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-                        <li data-target="#customCarousel1" data-slide-to="1"></li>
-                        <li data-target="#customCarousel1" data-slide-to="2"></li>
-                    </ol>
-                </div>
-            </div>
-
-        </section>
-        <!-- end slider section -->
     </div>
+</nav>
